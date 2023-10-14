@@ -1,9 +1,6 @@
 package config;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
@@ -14,23 +11,21 @@ public class SetupDriver {
 
     public SetupDriver() {
         this.config = new Config();
+
+        setUpTest();
+
         webDriver = new ChromeDriver();
         webDriver.manage().window().maximize();
+
+        openUrl();
     }
 
-    @BeforeAll
-    static void setUpTest() {
+    void setUpTest() {
         WebDriverManager.chromedriver().setup();
     }
 
-    @BeforeEach
     void openUrl() {
         webDriver.get(this.config.getBaseUrl());
-    }
-
-    @AfterEach
-    void closeBrowser() {
-        webDriver.close();
     }
 
     public String getCurrentUrl() {
