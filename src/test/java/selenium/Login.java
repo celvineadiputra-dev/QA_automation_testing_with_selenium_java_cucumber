@@ -4,10 +4,10 @@ import config.ElementFormLogin;
 import config.SetupDriver;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class Login extends SetupDriver {
     private final ElementFormLogin elementFormLogin;
@@ -35,6 +35,18 @@ public class Login extends SetupDriver {
     }
 
     @Test
+    public void validateInputForm() {
+        WebElement userName = this.elementFormLogin.userName();
+        WebElement password = this.elementFormLogin.password();
+
+        userName.sendKeys(this.config.getStandardUser().getUserName());
+        password.sendKeys(this.config.getStandardUser().getPassword());
+
+        assertEquals(this.config.getStandardUser().getUserName(), userName.getAttribute("value"));
+        assertEquals(this.config.getStandardUser().getPassword(), password.getAttribute("value"));
+    }
+
+    @Test
     @DisplayName("Login using : standard_user and correct password")
     public void successLogin() {
         WebElement userName = this.elementFormLogin.userName();
@@ -47,7 +59,7 @@ public class Login extends SetupDriver {
 
         String currentUrl = webDriver.getCurrentUrl();
 
-        assertEquals(this.config.currenUrl("inventory.html"), currentUrl);
+        assertEquals(this.config.currentUrl("inventory.html"), currentUrl);
     }
 
     @Test
@@ -61,9 +73,36 @@ public class Login extends SetupDriver {
         password.sendKeys(this.config.getStandardUser().getWrongPassword());
         buttonLogin.click();
 
-        int errorAlert = webDriver.findElements(By.cssSelector(".error-message-container.error")).size();
+        int errorAlert = this.elementFormLogin.sizeErrorAlert();
 
-        assertNotEquals(this.config.currenUrl("inventory.html"), this.getCurrentUrl());
+        assertEquals(1, errorAlert);
+    }
+
+    @Test
+    @DisplayName("Login without user name")
+    public void loginWithOutUserName() {
+        WebElement password = this.elementFormLogin.password();
+        WebElement buttonLogin = this.elementFormLogin.loginButton();
+
+        password.sendKeys(this.config.getStandardUser().getWrongPassword());
+        buttonLogin.click();
+
+        int errorAlert = this.elementFormLogin.sizeErrorAlert();
+
+        assertEquals(1, errorAlert);
+    }
+
+    @Test
+    @DisplayName("Login without password")
+    public void loginWithOutPassword() {
+        WebElement userName = this.elementFormLogin.userName();
+        WebElement buttonLogin = this.elementFormLogin.loginButton();
+
+        userName.sendKeys(this.config.getStandardUser().getUserName());
+        buttonLogin.click();
+
+        int errorAlert = this.elementFormLogin.sizeErrorAlert();
+
         assertEquals(1, errorAlert);
     }
 }

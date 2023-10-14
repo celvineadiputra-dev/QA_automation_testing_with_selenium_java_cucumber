@@ -22,4 +22,8 @@ public class ElementFormLogin {
     public WebElement loginButton() {
         return this.webDriver.findElement(By.id("login-button"));
     }
+
+    public int sizeErrorAlert() {
+        return this.webDriver.findElements(By.cssSelector(".error-message-container.error")).size();
+    }
 }

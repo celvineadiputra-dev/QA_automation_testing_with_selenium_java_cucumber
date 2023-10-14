@@ -3,7 +3,7 @@ package config;
 import config.models.User;
 
 public class Config {
-    private String baseUrl = "https://www.saucedemo.com/";
+    private final String baseUrl = "https://www.saucedemo.com/";
 
     public User standardUser, lockedOutUser, problemUser, errorUser;
 
@@ -18,7 +18,7 @@ public class Config {
         return this.baseUrl;
     }
 
-    public String currenUrl(String path) {
+    public String currentUrl(String path) {
         return this.baseUrl + path;
     }
 
