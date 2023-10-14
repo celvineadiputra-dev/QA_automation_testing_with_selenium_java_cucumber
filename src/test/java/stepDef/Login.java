@@ -1,7 +1,8 @@
 package stepDef;
 
-import config.ElementFormLogin;
 import config.SetupDriver;
+import config.elements.ElementFormLogin;
+import io.cucumber.java.After;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -11,7 +12,6 @@ import org.openqa.selenium.WebElement;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-
 public class Login extends SetupDriver {
     private final ElementFormLogin elementFormLogin;
 
@@ -19,40 +19,45 @@ public class Login extends SetupDriver {
         this.elementFormLogin = new ElementFormLogin(super.webDriver);
     }
 
-    @Given("User already in app login page")
-    public void user_already_in_app_login_page() {
+    @Given("The user opens the web page or app")
+    public void userAlreadyOpenApp() {
         String currentTitle = this.getCurrentTitle();
         assertEquals("Swag Labs", currentTitle);
     }
 
-    @When("User input username (.*)$")
-    public void user_input_user_name_email(String email) {
+    @When("The user enters (.*) as username$")
+    public void userInputUserName(String username) {
         WebElement userNameField = this.elementFormLogin.userName();
-        userNameField.sendKeys(email);
+        userNameField.sendKeys(username);
     }
 
-    @And("User input password (.*)$")
-    public void user_input_password_password(String password) {
+    @And("The user enters (.*) as password$")
+    public void userInputPassword(String password) {
         WebElement passwordElement = this.elementFormLogin.password();
         passwordElement.sendKeys(password);
     }
 
-    @And("User click button login")
-    public void user_click_button_login() {
+    @And("The user clicks the login button")
+    public void userClickButtonLogin() {
         WebElement buttonLogin = this.elementFormLogin.loginButton();
         buttonLogin.click();
     }
 
-    @Then("User will be redirect to dashboard screen")
-    public void user_will_be_redirect_to_dashboard_screen() {
+    @Then("The user should be logged in successfully")
+    public void userSuccessfullyLogin() {
         String currentUrl = this.getCurrentUrl();
-        Assertions.assertEquals(this.addPathToCurrentUrl("inventory.html"), currentUrl);
+        Assertions.assertEquals(this.config.currentUrl("inventory.html"), currentUrl);
     }
 
-    @Then("User should see an authentication error message")
+    @Then("The user should see an authentication error message")
     public void userShouldSeeAnAuthenticationErrorMessage() {
         int errorAlert = this.elementFormLogin.sizeErrorAlert();
 
         assertEquals(1, errorAlert);
+    }
+
+    @After(order = 0)
+    public void closeBrowser() {
+        webDriver.close();
     }
 }

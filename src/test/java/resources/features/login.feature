@@ -1,23 +1,23 @@
 Feature: Login feature
 
-  Scenario: Login with correct credential
-    Given User already in app login page
-    When User input username <email>
-    And User input password <password>
-    And User click button login
-    Then User will be redirect to dashboard screen
+  Scenario Outline: User successfully logs in with valid credentials
+    Given The user opens the web page or app
+    When The user enters <username> as username
+    And The user enters <password> as password
+    And The user clicks the login button
+    Then The user should be logged in successfully
 
-  Example:
-    | email | password |
-    | standard_user | secret_sauce |
+    Examples:
+      | username      | password     |
+      | standard_user | secret_sauce |
 
-  Scenario: Login with wrong password
-    Given User already in app login page
-    When User input username <email>
-    And User input password <password>
-    And User click button login
-    Then User should see an authentication error message
+  Scenario Outline: User fails to log in with invalid credentials
+    Given The user opens the web page or app
+    When The user enters <username> as username
+    And The user enters <password> as password
+    And The user clicks the login button
+    Then The user should see an authentication error message
 
-  Example:
-    | email | password |
-    | example | 123 |
+    Examples:
+      | username | password |
+      | example  | 123      |

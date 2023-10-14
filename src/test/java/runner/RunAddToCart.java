@@ -8,7 +8,7 @@ import org.junit.runner.RunWith;
 @CucumberOptions(
         features = "src/test/java/resources/features",
         glue = "stepDef",
-        plugin = {"html:target/Login_report.html"}
+        plugin = {"html:target/AddToCart_report.html"}
 )
-public class RunLogin {
+public class RunAddToCart {
 }

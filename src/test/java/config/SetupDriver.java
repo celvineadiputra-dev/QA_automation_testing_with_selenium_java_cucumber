@@ -1,7 +1,6 @@
 package config;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
-import org.junit.jupiter.api.AfterEach;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
@@ -21,7 +20,7 @@ public class SetupDriver {
         openUrl();
     }
 
-    static void setUpTest() {
+    void setUpTest() {
         WebDriverManager.chromedriver().setup();
     }
 
@@ -29,17 +28,8 @@ public class SetupDriver {
         webDriver.get(this.config.getBaseUrl());
     }
 
-    @AfterEach
-    void closeBrowser() {
-        webDriver.close();
-    }
-
     public String getCurrentUrl() {
         return this.webDriver.getCurrentUrl();
-    }
-
-    public String addPathToCurrentUrl(String path) {
-        return this.config.getBaseUrl() + path;
     }
 
     public String getCurrentTitle() {
