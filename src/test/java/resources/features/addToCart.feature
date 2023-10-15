@@ -1,7 +1,7 @@
 Feature: Add Product to Cart
 
   Background:
-    Given The user is logged in
+    Given The user should be logged in
 
   Scenario: User successfully adds a product to the cart
     When The user clicks the add to cart button

@@ -2,7 +2,6 @@ package stepDef;
 
 import config.SetupDriver;
 import config.elements.ElementFormLogin;
-import io.cucumber.java.After;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -25,16 +24,28 @@ public class Login extends SetupDriver {
         assertEquals("Swag Labs", currentTitle);
     }
 
-    @When("The user enters (.*) as username$")
-    public void userInputUserName(String username) {
+    @When("The user enters valid as username")
+    public void userInputUserName() {
         WebElement userNameField = this.elementFormLogin.userName();
-        userNameField.sendKeys(username);
+        userNameField.sendKeys(this.config.auth.getUserNameStandardUser());
     }
 
-    @And("The user enters (.*) as password$")
-    public void userInputPassword(String password) {
+    @And("The user enters valid as password")
+    public void userInputPassword() {
         WebElement passwordElement = this.elementFormLogin.password();
-        passwordElement.sendKeys(password);
+        passwordElement.sendKeys(this.config.auth.getPasswordStandardUser());
+    }
+
+    @When("The user enters invalid as username")
+    public void userInputInValidUserName() {
+        WebElement userNameField = this.elementFormLogin.userName();
+        userNameField.sendKeys(this.config.auth.getUserNameFakeUser());
+    }
+
+    @And("The user enters invalid as password")
+    public void userInputInValidPassword() {
+        WebElement passwordElement = this.elementFormLogin.password();
+        passwordElement.sendKeys(this.config.auth.getPasswordFakeUser());
     }
 
     @And("The user clicks the login button")
@@ -49,15 +60,15 @@ public class Login extends SetupDriver {
         Assertions.assertEquals(this.config.currentUrl("inventory.html"), currentUrl);
     }
 
-    @Then("The user should see an authentication error message")
-    public void userShouldSeeAnAuthenticationErrorMessage() {
+    @Then("The user should be see error message")
+    public void userFailedLogin() {
         int errorAlert = this.elementFormLogin.sizeErrorAlert();
 
         assertEquals(1, errorAlert);
     }
 
-    @After(order = 0)
-    public void closeBrowser() {
-        webDriver.close();
-    }
+//    @After(order = 0)
+//    public void closeBrowser() {
+//        webDriver.close();
+//    }
 }

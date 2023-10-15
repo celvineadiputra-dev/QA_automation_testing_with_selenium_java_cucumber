@@ -1,23 +1,15 @@
 Feature: Login feature
 
-  Scenario Outline: User successfully logs in with valid credentials
+  Scenario: User successfully logs in with valid credentials
     Given The user opens the web page or app
-    When The user enters <username> as username
-    And The user enters <password> as password
+    When The user enters valid as username
+    And The user enters valid as password
     And The user clicks the login button
     Then The user should be logged in successfully
 
-    Examples:
-      | username      | password     |
-      | standard_user | secret_sauce |
-
-  Scenario Outline: User fails to log in with invalid credentials
+  Scenario: User failed logs in with valid credentials
     Given The user opens the web page or app
-    When The user enters <username> as username
-    And The user enters <password> as password
+    When The user enters invalid as username
+    And The user enters invalid as password
     And The user clicks the login button
-    Then The user should see an authentication error message
-
-    Examples:
-      | username | password |
-      | example  | 123      |
+    Then The user should be see error message
