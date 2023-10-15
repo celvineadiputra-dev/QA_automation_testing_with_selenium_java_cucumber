@@ -2,6 +2,7 @@ package stepDef;
 
 import config.SetupDriver;
 import config.elements.ElementFormLogin;
+import io.cucumber.java.After;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -67,8 +68,8 @@ public class Login extends SetupDriver {
         assertEquals(1, errorAlert);
     }
 
-//    @After(order = 0)
-//    public void closeBrowser() {
-//        webDriver.close();
-//    }
+    @After(order = 0)
+    public void closeBrowser() {
+        webDriver.close();
+    }
 }

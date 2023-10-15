@@ -5,7 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 public class SetupDriver {
-    protected final Config config;
+    public Config config;
 
     public WebDriver webDriver;
 

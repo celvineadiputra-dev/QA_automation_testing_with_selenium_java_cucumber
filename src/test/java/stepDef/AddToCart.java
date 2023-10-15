@@ -3,8 +3,8 @@ package stepDef;
 import config.SetupDriver;
 import config.elements.ElementFormLogin;
 import config.elements.ElementInventory;
+import config.models.User;
 import io.cucumber.java.After;
-import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -15,25 +15,20 @@ public class AddToCart extends SetupDriver {
     private final ElementFormLogin elementFormLogin;
     private final ElementInventory elementInventory;
 
+    private final State state;
+
     public AddToCart() {
         this.elementFormLogin = new ElementFormLogin(super.webDriver);
         this.elementInventory = new ElementInventory(super.webDriver);
+
+        User standardUser = super.config.auth.getStandardUser();
+
+        this.state = new State(super.webDriver, standardUser);
     }
 
-    @Before
+    @Given("The user should be logged in")
     public void login() {
-        WebElement userNameField = this.elementFormLogin.userName();
-        WebElement passwordField = this.elementFormLogin.password();
-
-        userNameField.sendKeys("standard_user");
-        passwordField.sendKeys("secret_sauce");
-
-        this.elementFormLogin.loginButton().click();
-    }
-
-    @Given("The user is logged in")
-    public void userAlreadyLoggedIn() {
-        Assertions.assertEquals(this.config.currentUrl("inventory.html"), this.getCurrentUrl());
+        this.state.login();
     }
 
     @When("The user clicks the add to cart button")
