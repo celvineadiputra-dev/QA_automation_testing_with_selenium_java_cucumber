@@ -17,24 +17,16 @@ public class Cart {
         this.setupDriver.getWebDriver().navigate().to(this.setupDriver.getConfig().currentUrl("cart.html"));
     }
 
-    public void assertAtLeastXProductsInShoppingCart() {
+    public void assertAtLeastXProductsInShoppingCart(int number) {
         this.elementFormCart.cartList();
 
         int size = this.elementFormCart.getItemInCartList().getSizeOfCart();
 
-        Assertions.assertTrue(size >= 2);
+        Assertions.assertTrue(size >= number);
     }
 
     public void clickRemoveButtonForFirstItem() {
         this.elementFormCart.getItemInCartList().getIndexOfCartList(0).remove();
-    }
-
-    public void assertProductInShoppingCartIsX() {
-        this.elementFormCart.cartList();
-
-        int size = this.elementFormCart.getItemInCartList().getSizeOfCart();
-
-        Assertions.assertTrue(size >= 1);
     }
 
     public void assertShoppingCartIsEmpty() {

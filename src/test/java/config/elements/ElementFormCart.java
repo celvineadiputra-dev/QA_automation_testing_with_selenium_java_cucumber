@@ -49,4 +49,8 @@ public class ElementFormCart {
         this.getItemName();
         this.webDriver.findElement(By.id("remove-" + this.productName)).click();
     }
+
+    public WebElement checkoutButton() {
+        return this.cartList.findElement(By.id("checkout"));
+    }
 }

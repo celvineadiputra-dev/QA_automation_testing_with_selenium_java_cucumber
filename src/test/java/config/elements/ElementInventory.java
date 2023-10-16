@@ -26,4 +26,8 @@ public class ElementInventory {
     public WebElement shoppingCart() {
         return this.webDriver.findElement(By.cssSelector(".shopping_cart_link > .shopping_cart_badge"));
     }
+
+    public String sh() {
+        return this.webDriver.findElement(By.id("shopping_cart_container")).getText();
+    }
 }

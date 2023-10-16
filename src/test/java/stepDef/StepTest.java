@@ -8,17 +8,20 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import main.AddToProductCart;
 import main.Cart;
+import main.Checkout;
 import main.Login;
 
 public class StepTest extends SetupDriver {
     private final Login login;
     private final AddToProductCart addToProductCart;
     private final Cart cart;
+    private final Checkout checkout;
 
     public StepTest() {
         this.login = new Login(this.getSetUpDriver());
         this.addToProductCart = new AddToProductCart(this.getSetUpDriver());
         this.cart = new Cart(this.getSetUpDriver());
+        this.checkout = new Checkout(this.getSetUpDriver());
     }
 
     // START OPEN APP
@@ -29,22 +32,22 @@ public class StepTest extends SetupDriver {
     // END OPEN APP
 
     // START LOGIN
-    @When("The user enters valid as username")
+    @When("The user enters a valid username")
     public void enterValidUserName() {
         this.login.enterValidUserName();
     }
 
-    @When("The user enters invalid as username")
+    @When("The user enters a invalid username")
     public void enterInValidUserName() {
         this.login.enterInValidUserName();
     }
 
-    @And("The user enters valid as password")
+    @And("The user enters a valid password")
     public void enterValidPassword() {
         this.login.enterValidPassword();
     }
 
-    @And("The user enters invalid as password")
+    @And("The user enters a invalid password")
     public void enterInValidPassword() {
         this.login.enterInValidPassword();
     }
@@ -81,7 +84,7 @@ public class StepTest extends SetupDriver {
         this.addToProductCart.cartNumberWillBePlusOne();
     }
 
-    @When("The user click the add to cart button other product")
+    @When("The user clicks the add to cart button for another product")
     public void userClickAddToCartOtherProductButton() {
         this.addToProductCart.userClickAddToCartOtherProductButton();
     }
@@ -98,14 +101,14 @@ public class StepTest extends SetupDriver {
     // END ADD TO CART
 
     // START CART
-    @Then("The user in cart page")
+    @Then("The user is on the cart page")
     public void userNavigateToCartPage() {
         this.cart.userNavigateToCartPage();
     }
 
-    @Then("The user should see at least 2 products in their cart")
-    public void assertAtLeastXProductsInShoppingCart() {
-        this.cart.assertAtLeastXProductsInShoppingCart();
+    @Then("The user should see at least {int} products in their cart")
+    public void assertAtLeastXProductsInShoppingCart(int number) {
+        this.cart.assertAtLeastXProductsInShoppingCart(number);
     }
 
     @When("The user clicks the remove button for the first item")
@@ -113,16 +116,69 @@ public class StepTest extends SetupDriver {
         this.cart.clickRemoveButtonForFirstItem();
     }
 
-    @Then("The product in the shopping cart should be 1")
-    public void assertProductInShoppingCartIsX() {
-        this.cart.assertProductInShoppingCartIsX();
-    }
-
     @Then("The shopping cart should be empty")
     public void assertShoppingCartIsEmpty() {
         this.cart.assertShoppingCartIsEmpty();
     }
     // END CART
+
+    // Start Checkout
+    @Then("The user clicks the checkout button")
+    public void clickCheckOutButton() {
+        this.checkout.clickCheckOutButton();
+    }
+
+    @Then("The user should be on the checkout page")
+    public void userShouldBeOnCheckoutPage() {
+        this.checkout.userShouldBeOnCheckoutPage();
+    }
+
+    @Then("The user enters (.*) as the first name$")
+    public void userEntersExampleAsFirstName(String firstName) {
+        this.checkout.userEntersExampleAsFirstName(firstName);
+    }
+
+    @Then("The user enters (.*) as the last name$")
+    public void userEntersExampleLastNameAsLastName(String lastName) {
+        this.checkout.userEntersExampleLastNameAsLastName(lastName);
+    }
+
+    @Then("The user enters (.*) as the postal code$")
+    public void userEntersPostalCode(int postalCode) {
+        this.checkout.userEntersPostalCode(postalCode);
+    }
+
+    @Then("The user clicks the continue button")
+    public void userClicksContinueButton() {
+        this.checkout.userClicksContinueButton();
+    }
+
+    @Then("The user should be redirected to the checkout page step {string}")
+    public void userShouldBeRedirectedToCheckoutPageStep(String stepNumber) {
+        this.checkout.userShouldBeRedirectedToCheckoutPageStep(stepNumber);
+    }
+
+    @Then("The user clicks the finish button")
+    public void userClicksFinishButton() {
+        this.checkout.userClicksFinishButton();
+    }
+
+    @Then("The user should be redirected to the checkout complete page")
+    public void userShouldBeRedirectedToCheckoutCompletePage() {
+        this.checkout.userShouldBeRedirectedToCheckoutCompletePage();
+    }
+
+    @Then("The user clicks the back home button")
+    public void userClicksBackHomeButton() {
+        this.checkout.userClicksBackHomeButton();
+    }
+
+    @Then("The number of items in the cart icon should be empty")
+    public void numberOfItemsInCartIconShouldBeEmpty() {
+        this.checkout.numberOfItemsInCartIconShouldBeEmpty();
+    }
+
+    // End Checkout
 
     // DONE
     @After(order = 0)
