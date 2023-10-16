@@ -11,6 +11,10 @@ public class ElementInventory {
         this.webDriver = webDriver;
     }
 
+    public WebElement shoppingCartContainer() {
+        return this.webDriver.findElement(By.cssSelector(""));
+    }
+
     public WebElement buttonAddToCart(String productName) {
         return this.webDriver.findElement(By.id("add-to-cart-" + productName));
     }

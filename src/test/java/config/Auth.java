@@ -8,7 +8,11 @@ public class Auth {
 
     public Auth() {
         this.standardUser = new User("standard_user", "secret_sauce");
-        this.fakeUser = new User("", "secret_sauce");
+        this.fakeUser = new User("fake_user", "fake_password");
+    }
+
+    public User getStandardUser() {
+        return this.standardUser;
     }
 
     public String getUserNameStandardUser() {
