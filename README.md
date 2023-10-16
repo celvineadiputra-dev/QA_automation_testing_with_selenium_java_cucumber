@@ -34,7 +34,7 @@ https://www.saucedemo.com/
 
 #### Login Feature
 
-![](/home/celvine/Downloads/code/Tugas_06_CelvineAdiPutra/report/Login.png)
+![](report/Login.png)
 
 ```gherkin
 Feature: Login feature
@@ -63,7 +63,7 @@ Feature: Login feature
 
 #### Add Product to Cart
 
-![](/home/celvine/Downloads/code/Tugas_06_CelvineAdiPutra/report/AddToCart.png)
+![RP. dsdsjdk](report/AddToCart.png)
 
 ```gherkin
 Feature: Add Product to Cart
@@ -86,7 +86,7 @@ Feature: Add Product to Cart
 
 #### Cart
 
-![](/home/celvine/Downloads/code/Tugas_06_CelvineAdiPutra/report/Cart.png)
+![](report/Cart.png)
 
 ```gherkin
 Feature: Remove Items from Cart
@@ -112,7 +112,7 @@ Feature: Remove Items from Cart
 
 #### Checkout
 
-![](/home/celvine/Downloads/code/Tugas_06_CelvineAdiPutra/report/Checkout.png)
+![](report/Checkout.png)
 
 ```gherkin
 Feature: Checkout
