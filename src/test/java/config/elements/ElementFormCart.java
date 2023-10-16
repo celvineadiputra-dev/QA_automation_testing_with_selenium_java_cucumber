@@ -1,5 +1,6 @@
 package config.elements;
 
+import config.utils.ConvertStringToKebabCase;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -12,6 +13,8 @@ public class ElementFormCart {
     private List<WebElement> itemInCartList;
 
     private WebElement selectedItem;
+
+    private String productName;
 
     public ElementFormCart(WebDriver webDriver) {
         this.webDriver = webDriver;
@@ -37,6 +40,13 @@ public class ElementFormCart {
     }
 
     public String getItemName() {
-        return this.selectedItem.findElement(By.cssSelector(".cart_item_label>a>inventory_item_name")).getText();
+        String productName = this.selectedItem.findElement(By.cssSelector(".cart_item_label>a>.inventory_item_name")).getText();
+        this.productName = new ConvertStringToKebabCase(productName).convert();
+        return this.productName;
+    }
+
+    public void remove() {
+        this.getItemName();
+        this.webDriver.findElement(By.id("remove-" + this.productName)).click();
     }
 }

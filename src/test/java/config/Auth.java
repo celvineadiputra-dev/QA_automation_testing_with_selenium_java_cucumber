@@ -14,6 +14,7 @@ public class Auth {
     public User getStandardUser() {
         return this.standardUser;
     }
+
     public String getUserNameStandardUser() {
         return this.standardUser.getUserName();
     }

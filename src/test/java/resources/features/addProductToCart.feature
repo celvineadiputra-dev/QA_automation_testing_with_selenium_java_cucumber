@@ -1,7 +1,11 @@
 Feature: Add Product to Cart
 
   Background:
-    Given The user should be logged in
+    Given The user opens the web page or app
+    When The user enters valid as username
+    And The user enters valid as password
+    And The user clicks the login button
+    Then The user should be logged in successfully
 
   Scenario: User successfully adds a product to the cart
     When The user clicks the add to cart button

@@ -5,34 +5,42 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 public class SetupDriver {
-    public Config config;
-
-    public WebDriver webDriver;
+    private final Config config;
+    private WebDriver webDriver;
 
     public SetupDriver() {
-        this.config = new Config();
+        config = new Config();
 
-        setUpTest();
-
-        webDriver = new ChromeDriver();
-        webDriver.manage().window().maximize();
-
-        openUrl();
+        setChromeDriver();
+        setMaxScreen();
     }
 
-    void setUpTest() {
+    private void setChromeDriver() {
         WebDriverManager.chromedriver().setup();
+        webDriver = new ChromeDriver();
     }
 
-    void openUrl() {
-        webDriver.get(this.config.getBaseUrl());
+    private void setMaxScreen() {
+        webDriver.manage().window().maximize();
+    }
+
+    public void openDefaultApp() {
+        webDriver.get(config.getBaseUrl());
+    }
+
+    public WebDriver getWebDriver() {
+        return this.webDriver;
+    }
+
+    public Config getConfig() {
+        return config;
     }
 
     public String getCurrentUrl() {
         return this.webDriver.getCurrentUrl();
     }
 
-    public String getCurrentTitle() {
-        return this.webDriver.getTitle();
+    public SetupDriver getSetUpDriver() {
+        return this;
     }
 }
