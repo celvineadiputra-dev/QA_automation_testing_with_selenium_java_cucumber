@@ -1,4 +1,4 @@
-# Homework 06 | Celvine Adi Putra
+# 🚀 QA Automation with Selenium Java and Cucumber 🥒
 
 ### JDK Version
 
