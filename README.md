@@ -14,6 +14,7 @@ JDK : 20
 | 4  | io.cucumber             | cucumber-java          | 7.14.0  |
 | 5  | io.cucumber             | cucumber-junit         | 7.14.0  |
 | 6  | org.junit.platform      | junit-platform-console | 1.10.0  |
+| 7  | io.cucumber             | cucumber-picocontainer | 7.14.0  |
 
 ### Test Information
 
