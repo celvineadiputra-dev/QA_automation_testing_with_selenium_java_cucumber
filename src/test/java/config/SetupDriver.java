@@ -5,10 +5,10 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 public class SetupDriver {
-    private final Config config;
+    private Config config;
     private WebDriver webDriver;
 
-    public SetupDriver() {
+    public void startDriver() {
         config = new Config();
 
         setChromeDriver();

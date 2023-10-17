@@ -5,12 +5,12 @@ import config.elements.ElementInventory;
 import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.WebElement;
 
-public class AddToProductCart {
+public class AddProductToCart {
     private final SetupDriver setupDriver;
 
     private final ElementInventory elementInventory;
 
-    public AddToProductCart(SetupDriver setupDriver) {
+    public AddProductToCart(SetupDriver setupDriver) {
         this.setupDriver = setupDriver;
 
         this.elementInventory = new ElementInventory(this.setupDriver.getWebDriver());
@@ -44,9 +44,5 @@ public class AddToProductCart {
     public void cartNumberWillBePlusTwo() {
         WebElement shoppingCart = this.elementInventory.shoppingCart();
         Assertions.assertEquals("2", shoppingCart.getText());
-    }
-
-    public void verifyFirstProductButton() {
-        System.out.println("RUN ME TOO");
     }
 }
