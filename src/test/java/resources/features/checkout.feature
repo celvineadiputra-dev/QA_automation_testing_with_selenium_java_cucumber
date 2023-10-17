@@ -30,3 +30,41 @@ Feature: Checkout
       | example  | example_last_name | 3301       |
       | ---      | example_last_name | 3301       |
       | ?        | ---               | 0          |
+
+  Scenario: User Failed checks Out Products
+    Given The user is on the cart page
+    Then The user should see at least 2 products in their cart
+    And The user clicks the checkout button
+    And The user should be redirected to the checkout page step "one"
+    And The user clicks the continue button
+    Then The user should be see error message
+
+  Scenario: User Failed checks Out Products without first name
+    Given The user is on the cart page
+    Then The user should see at least 2 products in their cart
+    And The user clicks the checkout button
+    And The user should be redirected to the checkout page step "one"
+    And The user enters "example_last_name" as the last name
+    And The user enters 111 as the postal code
+    And The user clicks the continue button
+    Then The user should be see error message
+
+  Scenario: User Failed checks Out Products without last name
+    Given The user is on the cart page
+    Then The user should see at least 2 products in their cart
+    And The user clicks the checkout button
+    And The user should be redirected to the checkout page step "one"
+    And The user enters "example" as the first name
+    And The user enters 111 as the postal code
+    And The user clicks the continue button
+    Then The user should be see error message
+
+  Scenario: User Failed checks Out Products without postal code
+    Given The user is on the cart page
+    Then The user should see at least 2 products in their cart
+    And The user clicks the checkout button
+    And The user should be redirected to the checkout page step "one"
+    And The user enters "example" as the first name
+    And The user enters "example_last_name" as the last name
+    And The user clicks the continue button
+    Then The user should be see error message

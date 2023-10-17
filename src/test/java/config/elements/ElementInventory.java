@@ -30,4 +30,16 @@ public class ElementInventory {
     public String sh() {
         return this.webDriver.findElement(By.id("shopping_cart_container")).getText();
     }
+
+    public WebElement burgerButton() {
+        return this.webDriver.findElement(By.id("react-burger-menu-btn"));
+    }
+
+    public WebElement slideMenu() {
+        return this.webDriver.findElement(By.className("bm-menu-wrap"));
+    }
+
+    public WebElement logout() {
+        return this.webDriver.findElement(By.id("logout_sidebar_link"));
+    }
 }
